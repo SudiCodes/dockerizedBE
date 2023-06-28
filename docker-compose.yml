@@ -16,4 +16,6 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - 8000:8000
+    networks:
+      - dockerizedbe_default
     tty: true
