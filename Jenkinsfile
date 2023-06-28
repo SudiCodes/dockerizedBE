@@ -7,7 +7,7 @@ pipeline {
             steps {
                 sh 'echo clonning git repo ...'
                 sh 'git clone https://github.com/SudiCodes/dockerizedBE.git'
-                sh 'echo "git repo stored in $(pwd)"'
+                sh 'echo git repo stored in $(pwd)'
             }
         }
         stage('Copy File') {
