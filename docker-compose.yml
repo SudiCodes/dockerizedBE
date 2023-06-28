@@ -19,3 +19,7 @@ services:
     networks:
       - dockerizedbe_default
     tty: true
+
+networks:
+  dockerizedbe_default:
+    external: true
