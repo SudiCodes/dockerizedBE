@@ -11,8 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-# from .be_secrets import smtp, database
-import os
+from mt_backend.be_secrets import smtp, database
+# import os
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -78,14 +78,7 @@ WSGI_APPLICATION = 'mt_backend.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': os.environ.get("DB_ENGINE"),
-        'NAME': os.environ.get("DB_NAME"),
-        'USER': os.environ.get("DB_USER"),
-        'PASSWORD': os.environ.get("DB_PASSWORD"),
-        'HOST': os.environ.get("DB_HOST"),
-        'PORT': os.environ.get("DB_PORT"),
-    }
+    'default': database
 }
 
 
@@ -136,14 +129,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Email settings
-EMAIL_BACKEND = os.environ.get("EMAIL_BACKEND")
-EMAIL_HOST = os.environ.get("EMAIL_HOST")
-EMAIL_PORT = os.environ.get("EMAIL_PORT")
-EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER")
-EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD")
-EMAIL_USE_TLS = os.environ.get("EMAIL_USE_TLS")
-EMAIL_USE_SSL = os.environ.get("EMAIL_USE_SSL")
-DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL")
+EMAIL_BACKEND = smtp["EMAIL_BACKEND"]
+EMAIL_HOST = smtp["EMAIL_HOST"]
+EMAIL_PORT = smtp["EMAIL_PORT"]
+EMAIL_HOST_USER = smtp["EMAIL_HOST_USER"]
+EMAIL_HOST_PASSWORD = smtp["EMAIL_HOST_PASSWORD"]
+EMAIL_USE_TLS = smtp["EMAIL_USE_TLS"]
+EMAIL_USE_SSL = smtp["EMAIL_USE_SSL"]
+DEFAULT_FROM_EMAIL = smtp["DEFAULT_FROM_EMAIL"]
 
 
 AUTH_USER_MODEL = "authentication.Customer"
