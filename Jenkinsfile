@@ -10,11 +10,11 @@ pipeline {
                 sh 'echo git repo stored in $(pwd)'
             }
         }
-        // stage('Copy File') {
-        //     steps {
-        //         sh 'docker cp /home/v2/workspace/dockerizedBE/mt_backend/mt_backend/be_secrets.py /home/v2/workspace/workspace/BE1_main/mt_backend/mt_backend'
-        //     }
-        // }
+        stage('Copy File') {
+            steps {
+                sh 'cp /home/v2/workspace/dockerizedBE/mt_backend/mt_backend/be_secrets.py /home/v2/workspace/workspace/BE1_main/mt_backend/mt_backend'
+            }
+        }
         stage('Build') {
             steps {
                 sh 'docker stop dockerizedbe-dockerizedbe-1 || true'
