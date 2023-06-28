@@ -3,7 +3,7 @@ pipeline {
         label 'local-system' // Or use 'label' with the specific node name
     }
     stages {
-        stage('Checkout') {
+        stage('Clone') {
             steps {
                 sh 'echo clonning git repo ...'
                 sh 'git clone https://github.com/SudiCodes/dockerizedBE.git'
