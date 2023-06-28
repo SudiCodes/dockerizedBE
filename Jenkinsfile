@@ -5,9 +5,9 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout([$class: 'GitSCM',
-                          branches: [[name: '*/main']],
-                          userRemoteConfigs: [[url: 'https://github.com/SudiCodes/dockerizedBE.git']]])
+                sh 'echo clonning git repo ...'
+                sh 'git clone https://github.com/SudiCodes/dockerizedBE.git'
+                sh 'echo "git repo stored in $(pwd)"'
             }
         }
         stage('Copy File') {
