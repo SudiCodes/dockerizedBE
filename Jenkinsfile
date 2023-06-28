@@ -1,6 +1,6 @@
 pipeline {
     agent {
-        nodeName 'local-system' // Or use 'label' with the specific node name
+        label 'local-system' // Or use 'label' with the specific node name
     }
     stages {
         stage('Checkout') {
