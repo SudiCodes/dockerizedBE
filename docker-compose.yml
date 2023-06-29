@@ -11,6 +11,7 @@ services:
 
   dockerizedbe:
     image: dockerizedbe
+    container_name: django_be
     build:
       context: .
       dockerfile: ./Dockerfile

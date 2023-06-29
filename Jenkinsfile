@@ -17,8 +17,8 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'docker stop be1-dockerizedbe-1 || true'
-                sh 'docker rm be1-dockerizedbe-1 || true'
+                sh 'docker stop django_be || true'
+                sh 'docker rm django_be || true'
                 
                 // Remove the previous image (if any)
                 sh 'docker rmi dockerizedbe || true'

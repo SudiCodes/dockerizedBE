@@ -14,7 +14,7 @@ apt-get update -y && apt-get install -y postgresql-client
 
 echo  "${ORANGE}Setting up database ...${RESET}"
 export PGPASSWORD="admin"
-psql -U postgres -h db -p 5432 -c "CREATE DATABASE dockerized_db;"
+psql -U postgres -h db -p 5432 -c "CREATE DATABASE dockerized_db;" || true
 
 # Change to the appropriate directory
 echo  "${ORANGE}Changing the working directory ...${RESET}"
@@ -33,7 +33,7 @@ apt-get install -y pwgen
 # Set up the superuser
 echo  "${ORANGE}Creating superuser ...${RESET}"
 export DJANGO_SUPERUSER_PASSWORD=$(pwgen 32 1)
-python manage.py createsuperuser --no-input --email admin@felxiend.com --first_name admin --last_name $(hostname)
+python manage.py createsuperuser --no-input --email admin@felxiend.com --first_name admin --last_name $(hostname) || true
 
 # Create a non-root user
 echo  "${ORANGE}Creating an appuser...${RESET}"
