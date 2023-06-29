@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Copy File') {
             steps {
-                sh 'cp /home/v2/workspace/dockerizedBE/mt_backend/mt_backend/be_secrets.py /home/v2/workspace/workspace/BE1/mt_backend/mt_backend'
+                sh 'cp /home/v2/workspace/dockerizedBE/mt_backend/mt_backend/be_secrets.py /home/v2/workspace/workspace/dockerizedBE_main/mt_backend/mt_backend'
             }
         }
         stage('Build') {
