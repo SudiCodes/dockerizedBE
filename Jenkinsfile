@@ -27,7 +27,7 @@ pipeline {
                 sh 'docker rm django_be || true'
                 
                 // Remove the previous image (if any)
-                sh 'docker rmi dockerizedbe || true'
+                sh 'docker rmi -f dockerizedbe || true'
                 
                 // Start the new container using Docker Compose
                 sh 'docker-compose up -d'
