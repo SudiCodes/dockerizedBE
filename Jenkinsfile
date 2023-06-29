@@ -17,8 +17,8 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'docker stop dockerizedbe-dockerizedbe-1 || true'
-                sh 'docker rm dockerizedbe-dockerizedbe-1 || true'
+                sh 'docker stop be1-dockerizedbe-1 || true'
+                sh 'docker rm be1-dockerizedbe-1 || true'
                 
                 // Remove the previous image (if any)
                 sh 'docker rmi dockerizedbe || true'
