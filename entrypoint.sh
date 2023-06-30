@@ -33,7 +33,7 @@ apt-get install -y pwgen
 # Set up the superuser
 echo  "${ORANGE}Creating superuser ...${RESET}"
 export DJANGO_SUPERUSER_PASSWORD=$(pwgen 32 1)
-python manage.py createsuperuser --no-input --email admin@felxiend.com --first_name admin --last_name $(hostname) || true
+python manage.py createsuperuser --no-input --email $(hostname)@felxiend.com --first_name admin --last_name $(hostname) || true
 
 # Create a non-root user
 echo  "${ORANGE}Creating an appuser...${RESET}"
