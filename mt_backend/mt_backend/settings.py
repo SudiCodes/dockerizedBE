@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-from mt_backend.be_secrets import smtp, database
+from mt_backend.be_secrets import smtp, database, google_auth
 # import os
 
 
@@ -168,8 +168,8 @@ SOCIALACCOUNT_PROVIDERS = {
         # credentials, or list them here:
         # link ; https://console.cloud.google.com/apis/credentials
         'APP': {
-            'client_id': '735454997878-itjr0bhbjscv2ng65ppm5plmr1696h8a.apps.googleusercontent.com',
-            'secret': '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',
+            'client_id': google_auth["client_id"],
+            'secret': google_auth["secret"],
             'key': ''
         }
     }
