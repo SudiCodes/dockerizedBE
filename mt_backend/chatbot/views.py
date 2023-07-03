@@ -12,3 +12,7 @@ class ChatbotView(APIView):
         now = datetime.now()
         current_time = now.strftime("%H:%M:%S")
         return Response(f"Hello! The current time is: {current_time}")
+
+
+class BotobotView(APIView):
+    pass

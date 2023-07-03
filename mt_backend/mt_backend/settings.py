@@ -40,7 +40,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'rest_framework',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',  # ENABLING AUTH FOR GOOGLE
 
     'authentication'
 
@@ -69,6 +74,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request'  # for django-allauth
             ],
         },
     },
@@ -143,3 +149,28 @@ DEFAULT_FROM_EMAIL = smtp["DEFAULT_FROM_EMAIL"]
 
 
 AUTH_USER_MODEL = "authentication.Customer"
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+
+SITE_ID = 1  # required for all-auth
+# Provider specific settings
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        # For each OAuth based provider, either add a ``SocialApp``
+        # (``socialaccount`` app) containing the required client
+        # credentials, or list them here:
+        # link ; https://console.cloud.google.com/apis/credentials
+        'APP': {
+            'client_id': '735454997878-itjr0bhbjscv2ng65ppm5plmr1696h8a.apps.googleusercontent.com',
+            'secret': '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',
+            'key': ''
+        }
+    }
+}
