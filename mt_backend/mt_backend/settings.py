@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 from mt_backend.be_secrets import smtp, database, google_auth
+from datetime import timedelta
+
 # import os
 
 
@@ -28,7 +30,7 @@ SECRET_KEY = 'django-insecure-c987-fp(o%^xbvn4ti*6amq+28%de+m*(69xni*sl82)1=k)x3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -40,12 +42,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.sites',
+    # 'django.contrib.sites', # Enabled for all auth
     'rest_framework',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',  # ENABLING AUTH FOR GOOGLE
+    'corsheaders',
+    'djoser',
+    # 'oauth2_provider',
+    # 'social_django',
+    # 'drf_social_oauth2',
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'allauth.socialaccount.providers.google',  # ENABLING AUTH FOR GOOGLE
 
     'authentication'
 
@@ -54,6 +61,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -74,7 +82,12 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django.template.context_processors.request'  # for django-allauth
+                # for django-allauth
+                # 'django.template.context_processors.request'
+                # for drf-social-oauth2
+                # 'social_django.context_processors.backends',
+                # for drf-social-oauth2
+                # 'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -150,27 +163,95 @@ DEFAULT_FROM_EMAIL = smtp["DEFAULT_FROM_EMAIL"]
 
 AUTH_USER_MODEL = "authentication.Customer"
 
-AUTHENTICATION_BACKENDS = [
-    # Needed to login by username in Django admin, regardless of `allauth`
+
+# SITE_ID = 1  # required for all-auth
+# # Provider specific settings
+# SOCIALACCOUNT_PROVIDERS = {
+#     'google': {
+#         # For each OAuth based provider, either add a ``SocialApp``
+#         # (``socialaccount`` app) containing the required client
+#         # credentials, or list them here:
+#         # link ; https://console.cloud.google.com/apis/credentials
+#         'APP': {
+#             'client_id': google_auth["client_id"],
+#             'secret': google_auth["secret"],
+#             'key': ''
+#         }
+#     }
+# }
+
+
+# ACCOUNT_FORMS = {'signup': 'authentication.forms.CustomSignupForm'}
+
+
+# CORS settings
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_ORIGINS = ["https://example.com",
+                        "https://sub.example.com", "http://localhost:3000", "http://127.0.1.1:3000"]
+
+
+CSRF_TRUSTED_ORIGINS = ['http://localhost:3000', 'http://127.0.0.1:3000']
+
+CORS_ALLOW_HEADERS = (
+    "accept",
+    "authorization",
+    "content-type",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+)
+SESSION_COOKIE_SECURE = False
+# CSRF_COOKIE_HTTPONLY = False
+# CSRF_COOKIE_SECURE = False
+
+
+# REST FRAMEWORK configuration
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+
+AUTHENTICATION_BACKENDS = (
+    # 'drf_social_oauth2.backends.DjangoOAuth2',
     'django.contrib.auth.backends.ModelBackend',
+    # Google OAuth2
+    # 'social_core.backends.google.GoogleOAuth2',
+)
 
-    # `allauth` specific authentication methods, such as login by e-mail
-    'allauth.account.auth_backends.AuthenticationBackend',
-]
+
+SIMPLE_JWT = {
+    'AUTH_HEADER_TYPES': ('JWT',),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=180),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "ROTATE_REFRESH_TOKENS": True,
+    # "BLACKLIST_AFTER_ROTATION": True,
+    "UPDATE_LAST_LOGIN": False,
+}
 
 
-SITE_ID = 1  # required for all-auth
-# Provider specific settings
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        # For each OAuth based provider, either add a ``SocialApp``
-        # (``socialaccount`` app) containing the required client
-        # credentials, or list them here:
-        # link ; https://console.cloud.google.com/apis/credentials
-        'APP': {
-            'client_id': google_auth["client_id"],
-            'secret': google_auth["secret"],
-            'key': ''
-        }
+# Djoser configurations
+DJOSER = {
+    "LOGIN_FIELD": "email",
+    "USER_CREATE_PASSWORD_RETYPE": True,
+    "ACTIVATION_URL": "/activate/{uid}/{token}",
+    "SEND_ACTIVATION_EMAIL": True,
+    "SEND_CONFIRMATION_EMAIL": True,
+    "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
+    "PASSWORD_RESET_CONFIRM_URL": "/password-reset/{uid}/{token}",
+    "TOKEN_MODEL": None,
+    "SET_PASSWORD_RETYPE": True,
+    "PASSWORD_RESET_SHOW_EMAIL_NOT_FOUND": True,
+    "SERIALIZERS": {
+        'user': 'authentication.serializers.CustomerSerializer',
+        'user_create': 'authentication.serializers.CustomerSerializer',
+        'user_delete': 'djoser.serializers.UserDeleteSerializer',
     }
 }
+
+

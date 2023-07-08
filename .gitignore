@@ -162,3 +162,4 @@ sample_config
 sample_config/
 
 mt_backend/mt_backend/be_secrets.py
+mt_backend/certs/
