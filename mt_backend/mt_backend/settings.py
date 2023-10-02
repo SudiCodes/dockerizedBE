@@ -14,7 +14,10 @@ from pathlib import Path
 from mt_backend.be_secrets import smtp, database, google_auth
 from datetime import timedelta
 
-# import os
+# Pluggin the djnago backward incompartibility
+import django
+from django.utils.encoding import force_str
+django.utils.encoding.force_text = force_str
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -34,8 +37,31 @@ ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 
 # Application definition
+SHARED_APPS = (
+    'tenant_schemas',  # mandatory, should always be before any django app
+    'multitenancy',  # you must list the app where your tenant model resides in
+
+    'django.contrib.contenttypes',
+
+    # everything below here is optional
+    'django.contrib.auth',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.messages',
+    'django.contrib.admin',
+)
+
+TENANT_APPS = (
+    'django.contrib.contenttypes',
+
+    # your tenant-specific apps
+    'authentication',
+
+)
+
 
 INSTALLED_APPS = [
+    'tenant_schemas',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,19 +72,13 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'djoser',
-    # 'oauth2_provider',
-    # 'social_django',
-    # 'drf_social_oauth2',
-    # 'allauth',
-    # 'allauth.account',
-    # 'allauth.socialaccount',
-    # 'allauth.socialaccount.providers.google',  # ENABLING AUTH FOR GOOGLE
 
     'authentication'
 
 ]
 
 MIDDLEWARE = [
+    'tenant_schemas.middleware.TenantMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
@@ -164,23 +184,6 @@ DEFAULT_FROM_EMAIL = smtp["DEFAULT_FROM_EMAIL"]
 AUTH_USER_MODEL = "authentication.Customer"
 
 
-# SITE_ID = 1  # required for all-auth
-# # Provider specific settings
-# SOCIALACCOUNT_PROVIDERS = {
-#     'google': {
-#         # For each OAuth based provider, either add a ``SocialApp``
-#         # (``socialaccount`` app) containing the required client
-#         # credentials, or list them here:
-#         # link ; https://console.cloud.google.com/apis/credentials
-#         'APP': {
-#             'client_id': google_auth["client_id"],
-#             'secret': google_auth["secret"],
-#             'key': ''
-#         }
-#     }
-# }
-
-
 # ACCOUNT_FORMS = {'signup': 'authentication.forms.CustomSignupForm'}
 
 
@@ -255,3 +258,9 @@ DJOSER = {
 }
 
 
+# multi tenancy configuration
+DATABASE_ROUTERS = (
+    'tenant_schemas.routers.TenantSyncRouter',
+)
+
+TENANT_MODEL = "multitenancy.Client"
