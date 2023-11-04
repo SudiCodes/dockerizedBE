@@ -54,7 +54,8 @@ INSTALLED_APPS = [
     # 'allauth.socialaccount',
     # 'allauth.socialaccount.providers.google',  # ENABLING AUTH FOR GOOGLE
 
-    'authentication'
+    'authentication',
+    'webapp'
 
 ]
 
@@ -74,7 +75,7 @@ ROOT_URLCONF = 'mt_backend.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -253,5 +254,3 @@ DJOSER = {
         'user_delete': 'djoser.serializers.UserDeleteSerializer',
     }
 }
-
-
