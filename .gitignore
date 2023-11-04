@@ -161,5 +161,12 @@ cython_debug/
 sample_config
 sample_config/
 
+
+mt_backend/mt_backend/be_secrets.py
+mt_backend/certs/
+mt_backend/certs/*.jpeg
+mt_backend/certs/*.jpg
+mt_backend/certs/*.png
+
 mt_backend/mt_backend/be_secrets.py
 mt_backend/certs/
