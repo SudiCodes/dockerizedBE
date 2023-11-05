@@ -1,13 +1,27 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Your Web Page Title</title>
-    <!-- Add any additional meta tags, stylesheets, or scripts here -->
+    <title>MovieDB</title>
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}" />
+    <style>
+      .background {
+          background-image: url("http://127.0.0.1:9077/bg-img.jpg");
+          background-size: 100% 100%; /* Cover the entire container */
+          background-repeat: no-repeat; /* Prevent repetition */
+          background-position: center center; /* Center the image both horizontally and vertically */
+          height: 100vh;
+      }
+  </style
   </head>
   <body>
-    {% block content %} {% endblock content %}
+    <div class="background">
+      {% block content %} {% endblock content %}
+    </div>
+
 
     <script>
       // Your JavaScript code can go here

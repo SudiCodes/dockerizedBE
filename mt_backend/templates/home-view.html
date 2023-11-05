@@ -1,3 +1,19 @@
 {% extends "base.html" %} {% block content %}
-<h1>Sudipta {{ surname }}</h1>
+<h1>Welcome to MovieDB</h1>
+<br />
+<div>
+  <ul class="list-unstyled d-flex flex-row justify-content-start">
+    {% for title in titles %}
+    <li class="card border border-primary m-5" style="width: 18rem">
+      <img
+        class="card-img-top rounded"
+        src="{{ title.poster|safe }}"
+        alt="{{ title.name }}"
+        style="height: 300px"
+      />
+      <p class="card-text bg-primary text-white">{{ title.description }}</p>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
 {% endblock content %}

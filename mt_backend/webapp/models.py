@@ -28,4 +28,4 @@ class Title(models.Model):
     genre = models.ManyToManyField(Genre, related_name='titles')
     casts = models.ManyToManyField(CastMember, related_name='titles')
     rating = models.FloatField()
-    poster = models.ImageField()
+    poster = models.URLField()

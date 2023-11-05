@@ -17,25 +17,10 @@ class TitleViewset(ModelViewSet):
 
 
 def home_view(request):
-    name = "Sudipta"
-    random_index = random.randint(0, 9)
-
-    wordlist = [
-        "Smith",
-        "Johnson",
-        "Williams",
-        "Brown",
-        "Jones",
-        "Miller",
-        "Davis",
-        "Garcia",
-        "Rodriguez",
-        "Martinez"
-    ]
-    surname = wordlist[random_index]
     context = {
-        "surname": surname
+        "titles": TitleSerializer(Title.objects.all(), many=True).data
     }
+    # print(context["titles"])
     HTML_STRING = render_to_string("home-view.html", context=context)
 
     return HttpResponse(HTML_STRING)

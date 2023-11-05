@@ -143,6 +143,7 @@ STATIC_URL = 'static/'
 STATIC_ROOT = 'static/'
 STATICFILES_DIRS = [
     "/var/www/static/",
+    BASE_DIR / "mt_static"
 ]
 
 # Default primary key field type
