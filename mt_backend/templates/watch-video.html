@@ -1,0 +1,9 @@
+{% extends "base.html" %} {% block watch_video %}
+<h1 class="display-3 text-center heading mb-4">{{title.name}}</h1>
+<div>
+  <video controls width="640" height="360">
+    <source src="{{ title.video_url }}" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+</div>
+{% endblock watch_video %}

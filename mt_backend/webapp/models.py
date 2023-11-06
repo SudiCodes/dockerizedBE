@@ -29,3 +29,5 @@ class Title(models.Model):
     casts = models.ManyToManyField(CastMember, related_name='titles')
     rating = models.FloatField()
     poster = models.URLField()
+    video_url = models.URLField(null=True)
+    trailer_url = models.URLField(null=True)

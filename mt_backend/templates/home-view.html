@@ -15,7 +15,13 @@
         <p class="card-text text-white">{{ title.description }}</p>
       </div>
       <div class="d-flex justify-content-between">
-        <button type="button" class="btn btn-primary ml-2 mb-2">Watch</button>
+        <button
+          type="button"
+          class="btn btn-primary ml-2 mb-2"
+          onclick="window.location.href = '{% url 'watch_video' title.id %}';"
+        >
+          Watch
+        </button>
         <button type="button" class="btn btn-primary mr-2 mb-2">Rent</button>
       </div>
     </li>

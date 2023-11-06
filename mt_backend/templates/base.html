@@ -57,11 +57,8 @@
         </div>
       </div>
     </header>
-    {% comment %}
-    <div class="background">
-      {% endcomment %} {% block content %} {% endblock content %} {% comment %}
-    </div>
-    {% endcomment %}
+    <div>{% block content %} {% endblock content %}</div>
+    <div>{% block watch_video %} {% endblock watch_video %}</div>
 
     <script>
       // Your JavaScript code can go here
