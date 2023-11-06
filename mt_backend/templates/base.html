@@ -9,19 +9,59 @@
     <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}" />
     <style>
       .background {
-          background-image: url("http://127.0.0.1:9077/bg-img.jpg");
-          background-size: 100% 100%; /* Cover the entire container */
-          background-repeat: no-repeat; /* Prevent repetition */
-          background-position: center center; /* Center the image both horizontally and vertically */
-          height: 100vh;
+        background-image: url("http://127.0.0.1:9077/bg-img.jpg");
+        background-size: 100% 100%; /* Cover the entire container */
+        background-repeat: no-repeat; /* Prevent repetition */
+        background-position: center center; /* Center the image both horizontally and vertically */
+        height: 100vh;
       }
-  </style
+      .heading {
+        font-size: 72px;
+        background: -webkit-linear-gradient(#eee, #333);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+    </style>
   </head>
-  <body>
-    <div class="background">
-      {% block content %} {% endblock content %}
-    </div>
+  <body class="background">
+    <header class="p-3 bg-dark text-white bg-transparent mb-5">
+      <div class="container">
+        <div
+          class="d-flex flex-wrap justify-content-between align-items-center"
+        >
+          <!-- Left Side: First Four List Items -->
+          <ul class="nav col-12 col-lg-auto mb-2 mb-md-0">
+            <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
+            <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+          </ul>
 
+          <!-- Middle: Search Input -->
+          <form class="col-12 col-lg-auto mb-3 mb-md-0 me-lg-3">
+            <input
+              type="search"
+              class="form-control form-control-dark"
+              placeholder="Search..."
+              aria-label="Search"
+            />
+          </form>
+
+          <!-- Right Side: Buttons -->
+          <div class="text-end">
+            <button type="button" class="btn btn-outline-light me-2">
+              Login
+            </button>
+            <button type="button" class="btn btn-warning">Sign-up</button>
+          </div>
+        </div>
+      </div>
+    </header>
+    {% comment %}
+    <div class="background">
+      {% endcomment %} {% block content %} {% endblock content %} {% comment %}
+    </div>
+    {% endcomment %}
 
     <script>
       // Your JavaScript code can go here
