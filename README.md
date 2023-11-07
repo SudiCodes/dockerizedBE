@@ -51,3 +51,6 @@ Django commands:
 
 RUN backend with SSL:
 `gunicorn --certfile=certs/server.crt --keyfile=certs/server.key mt_backend.wsgi:application`
+
+RUN backend dev server with new-relic:
+`NEW_RELIC_CONFIG_FILE=newrelic.ini newrelic-admin run-program $python manage.py runserver 9090`

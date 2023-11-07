@@ -167,4 +167,5 @@ mt_backend/certs/
 mt_backend/*.jpeg
 mt_backend/*.jpg
 mt_backend/*.png
+mt_backend/newrelic.ini
 
