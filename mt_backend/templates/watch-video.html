@@ -1,9 +1,50 @@
-{% extends "base.html" %} {% block watch_video %}
-<h1 class="display-3 text-center heading mb-4">{{title.name}}</h1>
-<div>
-  <video controls width="640" height="360">
-    <source src="{{ title.video_url }}" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
+{% extends "base.html" %} {% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-9 pr-3">
+      <video controls class="col-12">
+        <source src="{{ title.video_url }}" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <div class="col-3 text-white">
+      <h2 class="display-5 text-center heading mb-4">{{ title.name }}</h2>
+      <h5 class="d-flex justify-content-between mb-3">
+        IMDB Rating:
+        <span class="badge bg-danger ml-auto">{{ title.rating }} ⭐</span>
+      </h5>
+
+      <div class="card l-bg-blue-dark mb-3">
+        <div class="card-statistic-3 p-4">
+          <div class="card-icon card-icon-large">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="mb-2">
+            <h5 class="card-title mb-0">Casts</h5>
+          </div>
+          <div class="text-left small-font">
+            {% for cast in title.casts %}
+            <div>{{ cast }}</div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="card l-bg-blue-dark mb-3">
+        <div class="card-statistic-3 p-4">
+          <div class="card-icon card-icon-large">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="mb-2">
+            <h5 class="card-title mb-0">Genre</h5>
+          </div>
+          <div class="text-left small-font">
+            {% for genre in title.genre %}
+            <div>{{ genre }}</div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-{% endblock watch_video %}
+{% endblock %}

@@ -45,5 +45,5 @@ class WatchVideoView(APIView):
         context = {
             "title": title
         }
-        print(title)
+        # print(title)
         return render(request, 'watch-video.html', context)
