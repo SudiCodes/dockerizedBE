@@ -26,4 +26,4 @@ urlpatterns = [
     path('auth/', include('authentication.urls')),
     # re_path(r'^auth/', include('drf_social_oauth2.urls', namespace='drf'))
     # path('accounts/', include('allauth.urls'))
-]+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

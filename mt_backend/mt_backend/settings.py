@@ -255,3 +255,9 @@ DJOSER = {
         'user_delete': 'djoser.serializers.UserDeleteSerializer',
     }
 }
+
+
+# Setting up MEDIA
+
+MEDIA_ROOT = BASE_DIR / "media"
+MEDIA_URL = "/media/"
