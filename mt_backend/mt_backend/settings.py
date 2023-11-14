@@ -55,7 +55,8 @@ INSTALLED_APPS = [
     # 'allauth.socialaccount.providers.google',  # ENABLING AUTH FOR GOOGLE
 
     'authentication',
-    'webapp'
+    'webapp',
+    'uploadapp'
 
 ]
 

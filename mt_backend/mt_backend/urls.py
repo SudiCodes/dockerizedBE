@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('chatbot.urls')),
     path('api/webapp/', include('webapp.urls')),
+    path('api/upload/', include('uploadapp.urls')),
     path('auth/', include('authentication.urls')),
     # re_path(r'^auth/', include('drf_social_oauth2.urls', namespace='drf'))
     # path('accounts/', include('allauth.urls'))
