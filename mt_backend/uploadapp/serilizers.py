@@ -34,9 +34,11 @@ class ImageFileSerializer(serializers.ModelSerializer):
     MAX_FILE_SIZE = 1 * 1024 * 1024  # 2MB in bytes
     ALLOWED_TYPES = ["image/jpeg", "image/png"]
 
+    img_file = serializers.ImageField()
+
     class Meta:
         model = ImageFile
-        fields = "__all__"
+        fields = ["img_file"]
 
     def validate_file(self, value):
         print(value.size)
@@ -63,3 +65,10 @@ class ImageFileSerializer(serializers.ModelSerializer):
             detected_mime_type = mime.from_buffer(file_content)
             file.seek(0)  # Reset file pointer after reading content
             return detected_mime_type
+
+
+class ImageFileSerilizerUploaded(serializers.ModelSerializer):
+
+    class Meta:
+        model = ImageFile
+        fields = "__all__"
