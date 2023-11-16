@@ -46,6 +46,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'djoser',
+    'auditlog',
+    'push_notifications',
+    'debug_toolbar',
     # 'oauth2_provider',
     # 'social_django',
     # 'drf_social_oauth2',
@@ -66,6 +69,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -262,3 +266,9 @@ DJOSER = {
 
 MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = "/media/"
+
+
+# Django Debug tool settings
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
