@@ -59,7 +59,8 @@ INSTALLED_APPS = [
 
     'authentication',
     'webapp',
-    'uploadapp'
+    'uploadapp',
+    'blogapp'
 
 ]
 
