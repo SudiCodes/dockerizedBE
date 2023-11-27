@@ -14,6 +14,7 @@ class Comment(models.Model):
 
 
 class Blog(models.Model):
+    title = models.CharField(max_length=1023, null=True, blank=True)
     content = models.TextField()
     uploaded_by = models.ForeignKey(
         Customer, on_delete=models.CASCADE, related_name='uploaded_by')
@@ -23,6 +24,7 @@ class Blog(models.Model):
         Comment, related_name='blog_comment', blank=True, through='BlogCommentRelation')
     updated_at = models.DateTimeField(auto_now=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    tags = models.JSONField(null=True, blank=True)
 
 
 class BlogCommentRelation(models.Model):
