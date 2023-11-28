@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'auditlog',
     'push_notifications',
     'debug_toolbar',
+    'rest_framework_swagger',
+    'drf_spectacular',
     # 'oauth2_provider',
     # 'social_django',
     # 'drf_social_oauth2',
@@ -222,6 +224,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 
@@ -273,3 +276,12 @@ MEDIA_URL = "/media/"
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+
+# drf-spectacular settings
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Multi Tenant Backend',
+    'DESCRIPTION': 'This projects serves backend for multiple apps',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+}
