@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-from mt_backend.be_secrets import smtp, database, google_auth
+from mt_backend.be_secrets import smtp, database, google_auth, cache
 from datetime import timedelta
 
 # import os
@@ -91,12 +91,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                # for django-allauth
-                # 'django.template.context_processors.request'
-                # for drf-social-oauth2
-                # 'social_django.context_processors.backends',
-                # for drf-social-oauth2
-                # 'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -285,3 +279,7 @@ SPECTACULAR_SETTINGS = {
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
 }
+
+
+# cache settings
+CACHES = cache
